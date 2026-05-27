@@ -1,0 +1,9 @@
+# PlatformIO build-files and libraries
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# locale editor settings and cache
+.clang_complete
+.gcc-flags.json
+.vscode/
