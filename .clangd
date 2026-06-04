@@ -1,0 +1,30 @@
+QueryDriver:
+  - "*/xtensa-esp32-elf-gcc"
+  - "*/bin/cc"
+  - "*/bin/g++"
+  - "cc"
+  - "g++"
+  
+CompileFlags:
+  # Vertel Clangd waar hij de compiler van PlatformIO kan vinden voor systeembestanden
+  Compiler: /home/bartoli/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc
+
+  # Verwijder de vlaggen waar Clang over struikelt
+  Remove:
+    - -fno-tree-switch-conversion
+    - -fstrict-volatile-bitfields 
+    - -mlongcalls
+  
+  # Zorg dat de juiste architectuur gesimuleerd wordt
+  Add:
+    - --target=xtensa,
+    - -Wno-unknown-warning-option,
+    - -isystem/home/bartoli/.platformio/packages/toolchain-xtensa-esp32/xtensa-esp32-elf/include
+    - -isystem/home/bartoli/.platformio/packages/toolchain-xtensa-esp32/lib/gcc/xtensa-esp32-elf/8.4.0/include
+    - -isystem/home/bartoli/.platformio/packages/toolchain-xtensa-esp32/lib/gcc/xtensa-esp32-elf/8.4.0/include-fixed
+
+# Dit blok vertelt Clangd dat hij de onoplosbare compiler-fout moet onderdrukken
+Diagnostics:
+  Suppress:
+    - machine_mode
+    - type_unsupported
